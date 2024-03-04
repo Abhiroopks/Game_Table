@@ -36,20 +36,25 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <h2>Game Table</h2>
+    <h2>MLB Game Table</h2>
 
   <table>
     <tr>
-      <th>Date</th>
+      <th>DateTime</th>
       <th>Home Team</th>
       <th>Away Team</th>
       <th>Location</th>
-      <th>Home Team Ranking</th>
-      <th>Away Team Ranking</th>
     </tr>
+
+    {% for mlb_game in mlb_games %}
+    <tr>
+      <td>{{mlb_game.datetime}}</td>
+      <td>{{mlb_game.home_team}}</td>
+      <td>{{mlb_game.away_team}}</td>
+      <td>{{mlb_game.location}}</td>
+    </tr>
+    {% endfor %}
    
   </table>
-
-    
   </body>
 </html>
