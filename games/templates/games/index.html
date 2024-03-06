@@ -38,23 +38,44 @@
 
     <h2>MLB Game Table</h2>
 
-  <table>
+  <table id="table">
     <tr>
-      <th>DateTime</th>
+      <th>Date (yyyy-mm-dd)</th>
+      <th>Time</th>
       <th>Home Team</th>
       <th>Away Team</th>
       <th>Location</th>
-    </tr>
-
-    {% for mlb_game in mlb_games %}
-    <tr>
-      <td>{{mlb_game.datetime}}</td>
-      <td>{{mlb_game.home_team}}</td>
-      <td>{{mlb_game.away_team}}</td>
-      <td>{{mlb_game.location}}</td>
-    </tr>
-    {% endfor %}
-   
+    </tr> 
   </table>
+
+  <script>
+    const table_socket = new WebSocket('ws://' + window.location.host + "/mlb_data");
+    const table = document.getElementById("table");
+
+    table_socket.onopen = function(e) {
+      //TODO: This number is hardcoded, this should be user-specified.
+      let num_days = 1;
+      this.send(num_days.toString())
+    }
+
+    table_socket.onmessage = function(e) {
+        const games_data = JSON.parse(e.data);
+        console.info("received games data from server.")
+        // add mlb game data to table
+        for(const game of games_data){
+          var row = table.insertRow();
+          row.insertCell().innerHTML = game.date;
+          row.insertCell().innerHTML = game.time;
+          row.insertCell().innerHTML = game.home_team;
+          row.insertCell().innerHTML = game.away_team;
+          row.insertCell().innerHTML = game.location;
+        }
+    };
+
+    table_socket.onclose = function(e) {
+        console.info("Socket to server closed.");
+    };
+  </script>
+
   </body>
 </html>

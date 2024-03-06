@@ -1,5 +1,4 @@
-from datetime import date, timedelta
-
+from datetime import date
 import statsapi as mlb_api
 
 from games.models import MLBGame
@@ -24,14 +23,15 @@ class MLBGenerator():
     """
     Class for managing the retrieval of MLB games and associated game data.
     """
-    def update_table_data(self, days: int):
+    def update_table_data(self, start_day: date, end_day: date):
         """
         Queries schedule and weather api to generate table data.
         
-        :arg days: Number of days to look ahead when fetching games.
+        :arg start_day: First day of games to include
+        :arg end_day: Last day of games to include
         :returns: None
         """
-        games = self.__get_games(days)
+        games = self.__get_games(start_day=start_day, end_day=end_day)
         for game in games:
             game_record: MLBGame = MLBGame()
             game_record.id = game["game_id"]
@@ -48,20 +48,19 @@ class MLBGenerator():
         
         
     
-    def __get_games(self, days: int) -> dict:
+    def __get_games(self, start_day: date, end_day: date) -> dict:
         """
-        Queries MLB schedule API to fetch list of future games.
+        Queries MLB schedule API to fetch list of future games over specified range of dates.
         
-        :arg days: Number of days to look ahead when fetching games.
+        :arg start_day: First day of games to include
+        :arg end_day: Last day of games to include
         :returns: dict of mlb games
         """
-        today = date.today()
-        next_week = today + timedelta(days=days)
-        formatted_date_today = today.strftime("%m/%d/%Y")
-        formatted_date_future = next_week.strftime("%m/%d/%Y")
+        formatted_date_start = start_day.strftime("%m/%d/%Y")
+        formatted_date_end = end_day.strftime("%m/%d/%Y")
 
         return mlb_api.schedule(
-            start_date=formatted_date_today, end_date=formatted_date_future
+            start_date=formatted_date_start, end_date=formatted_date_end
         )
     
     def __get_location_weather(self):
