@@ -1,8 +1,7 @@
 # Game Table
 
 ## Overview
-* Display weather data for MLB games
-* Display MLB games in the next 7 days
+* Display future MLB games and associated data
 
 ## Setup
 1. Create a python virtual environment and install dependencies at the project root.
@@ -28,6 +27,4 @@ python3 manage.py runserver
 
 
 ## TODO
-* Make sure game dates displayed to user use correct timezone
 * Add weather data to game records
-* Add team standing data to game records

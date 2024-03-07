@@ -40,10 +40,16 @@
 
   <table id="table">
     <tr>
-      <th>Date (yyyy-mm-dd)</th>
-      <th>Time</th>
+      <th>Date</th>
+      <th>Game Type</th>
       <th>Home Team</th>
       <th>Away Team</th>
+      <th>Home Win Pct</th>
+      <th>Away Win Pct</th>
+      <th>Home League Rank</th>
+      <th>Away League Rank</th>
+      <th>Home Division</th>
+      <th>Away Division</th>
       <th>Location</th>
     </tr> 
   </table>
@@ -65,9 +71,15 @@
         for(const game of games_data){
           var row = table.insertRow();
           row.insertCell().innerHTML = game.date;
-          row.insertCell().innerHTML = game.time;
+          row.insertCell().innerHTML = game.game_type;
           row.insertCell().innerHTML = game.home_team;
           row.insertCell().innerHTML = game.away_team;
+          row.insertCell().innerHTML = game.home_win_pct;
+          row.insertCell().innerHTML = game.away_win_pct;
+          row.insertCell().innerHTML = game.home_league_rank;
+          row.insertCell().innerHTML = game.away_league_rank;
+          row.insertCell().innerHTML = game.home_div;
+          row.insertCell().innerHTML = game.away_div;
           row.insertCell().innerHTML = game.location;
         }
     };
