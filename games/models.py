@@ -11,10 +11,7 @@ class MLBGame(models.Model):
     away_team = models.TextField()
     home_win_pct = models.FloatField()
     away_win_pct = models.FloatField()
-    home_league_rank = models.IntegerField()
-    away_league_rank = models.IntegerField()
-    home_div = models.TextField()
-    away_div = models.TextField()
+    win_pct_prod = models.FloatField()
     location = models.TextField()
 
     def to_dict(self):
@@ -29,9 +26,6 @@ class MLBGame(models.Model):
             "away_team": self.away_team,
             "home_win_pct": self.home_win_pct,
             "away_win_pct": self.away_win_pct,
-            "home_league_rank": self.home_league_rank,
-            "away_league_rank": self.away_league_rank,
-            "home_div": self.home_div,
-            "away_div": self.away_div,
+            "win_pct_prod": self.win_pct_prod,
             "location": self.location,
         }

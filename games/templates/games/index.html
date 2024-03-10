@@ -43,13 +43,10 @@
       <th>Date</th>
       <th>Game Type</th>
       <th>Home Team</th>
-      <th>Away Team</th>
       <th>Home Win Pct</th>
+      <th>Away Team</th>
       <th>Away Win Pct</th>
-      <th>Home League Rank</th>
-      <th>Away League Rank</th>
-      <th>Home Division</th>
-      <th>Away Division</th>
+      <th>Win Pct Product</th>
       <th>Location</th>
     </tr> 
   </table>
@@ -60,7 +57,7 @@
 
     table_socket.onopen = function(e) {
       //TODO: This number is hardcoded, this should be user-specified.
-      let num_days = 1;
+      let num_days = 7;
       this.send(num_days.toString())
     }
 
@@ -73,13 +70,10 @@
           row.insertCell().innerHTML = game.date;
           row.insertCell().innerHTML = game.game_type;
           row.insertCell().innerHTML = game.home_team;
-          row.insertCell().innerHTML = game.away_team;
           row.insertCell().innerHTML = game.home_win_pct;
+          row.insertCell().innerHTML = game.away_team;
           row.insertCell().innerHTML = game.away_win_pct;
-          row.insertCell().innerHTML = game.home_league_rank;
-          row.insertCell().innerHTML = game.away_league_rank;
-          row.insertCell().innerHTML = game.home_div;
-          row.insertCell().innerHTML = game.away_div;
+          row.insertCell().innerHTML = game.win_pct_prod;
           row.insertCell().innerHTML = game.location;
         }
     };

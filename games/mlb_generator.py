@@ -69,14 +69,13 @@ class MLBGenerator:
             # Standings data
             game_record.home_win_pct = standings[game_record.home_team]["win_pct"]
             game_record.away_win_pct = standings[game_record.away_team]["win_pct"]
-            game_record.home_league_rank = standings[game_record.home_team][
-                "league_rank"
-            ]
-            game_record.away_league_rank = standings[game_record.away_team][
-                "league_rank"
-            ]
-            game_record.home_div = standings[game_record.home_team]["div_name"]
-            game_record.away_div = standings[game_record.away_team]["div_name"]
+
+            ##
+            # Win Pct Product: a metric to measure combined win pct of teams.
+            # Higher nums = better matchup. (better teams playing eachother)
+            game_record.win_pct_prod = (
+                game_record.home_win_pct * game_record.away_win_pct
+            )
 
             game_record.save()
 
@@ -117,9 +116,6 @@ class MLBGenerator:
             start_date=formatted_date_start, end_date=formatted_date_end
         )
 
-    def __get_location_weather(self):
-        pass
-
     def __get_location(self, game: dict) -> Location:
         """
         Builds location using a game's venue city, state, and country.
@@ -132,7 +128,6 @@ class MLBGenerator:
         venue_info = mlb_api.get(endpoint="venue", params=params)
         loc = venue_info["venues"][0]["location"]
 
-        return Location(loc["city"], loc["state"], loc["country"])
-
-    def __get_team_ranking(self):
-        pass
+        return Location(
+            loc.get("city", ""), loc.get("state", ""), loc.get("country", "")
+        )

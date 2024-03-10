@@ -27,4 +27,4 @@ python3 manage.py runserver
 
 
 ## TODO
-* Add weather data to game records
+* Add date range selector

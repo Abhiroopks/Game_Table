@@ -8,6 +8,7 @@ from games.mlb_generator import MLBGenerator
 from games.models import MLBGame
 
 MLB_GENERATOR = MLBGenerator()
+NUM_TOP_GAMES = 5
 
 
 class MLBConsumer(WebsocketConsumer):
@@ -44,7 +45,7 @@ class MLBConsumer(WebsocketConsumer):
 
         games = MLBGame.objects.filter(
             date__range=(tomorrow, max_fetch_date + timedelta(days=1))
-        )
+        ).order_by("win_pct_prod")[:NUM_TOP_GAMES]
 
         ##
         # Craft list of JSON objects for the games
