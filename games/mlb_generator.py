@@ -67,8 +67,14 @@ class MLBGenerator:
 
             ##
             # Standings data
-            game_record.home_win_pct = standings[game_record.home_team]["win_pct"]
-            game_record.away_win_pct = standings[game_record.away_team]["win_pct"]
+            try:
+                game_record.home_win_pct = standings[game_record.home_team]["win_pct"]
+                game_record.away_win_pct = standings[game_record.away_team]["win_pct"]
+            ##
+            # If the standings dont contain these teams, they're not important.
+            except KeyError:
+                game_record.home_win_pct = 2
+                game_record.away_win_pct = 2
 
             ##
             # Win Pct Product: a metric to measure combined win pct of teams.

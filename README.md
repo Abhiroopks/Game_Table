@@ -27,4 +27,4 @@ python3 manage.py runserver
 
 
 ## TODO
-* Add date range selector
+* Delete games from database that are older than tomorrow (today and before)

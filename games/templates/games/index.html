@@ -1,18 +1,17 @@
 <!DOCTYPE html>
-
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Game Table</title>
-    <meta name="description" content="Sports Game Table">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-  </head>
-  <style>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Game Table</title>
+        <meta name="description" content="Sports Game Table">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <style>
   table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
@@ -28,37 +27,34 @@
   tr:nth-child(even) {
     background-color: #dddddd;
   }
-
-  </style>
-
-  <body>
-    <!--[if lt IE 7]>
+    </style>
+    <body>
+        <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
+        <h2>MLB Game Table</h2>
 
-    <h2>MLB Game Table</h2>
-
-  <table id="table">
-    <tr>
-      <th>Date</th>
-      <th>Game Type</th>
-      <th>Home Team</th>
-      <th>Home Win Pct</th>
-      <th>Away Team</th>
-      <th>Away Win Pct</th>
-      <th>Win Pct Product</th>
-      <th>Location</th>
-    </tr> 
-  </table>
-
-  <script>
+        </script>
+        <table id="table">
+            <tr>
+                <th>Date</th>
+                <th>Game Type</th>
+                <th>Home Team</th>
+                <th>Home Win Pct</th>
+                <th>Away Team</th>
+                <th>Away Win Pct</th>
+                <th>Win Pct Product</th>
+                <th>Location</th>
+            </tr>
+        </table>
+        <script>
     const table_socket = new WebSocket('ws://' + window.location.host + "/mlb_data");
     const table = document.getElementById("table");
 
     table_socket.onopen = function(e) {
       //TODO: This number is hardcoded, this should be user-specified.
-      let num_days = 7;
-      this.send(num_days.toString())
+      let num_days = 14;
+      this.send(num_days.toString());
     }
 
     table_socket.onmessage = function(e) {
@@ -81,7 +77,6 @@
     table_socket.onclose = function(e) {
         console.info("Socket to server closed.");
     };
-  </script>
-
-  </body>
+        </script>
+    </body>
 </html>
